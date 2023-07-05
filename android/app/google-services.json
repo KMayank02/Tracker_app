@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "724973534930",
+    "project_id": "anime-tracker-46e7f",
+    "storage_bucket": "anime-tracker-46e7f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724973534930:android:3ddba5e684681046eaf70b",
+        "android_client_info": {
+          "package_name": "com.example.anime_track"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724973534930-fiskhfe6hsovdgukstaj33p3jigkjpm7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.anime_track",
+            "certificate_hash": "9afa577d50ba81a7cac508d816eaf8b70dbd5a0b"
+          }
+        },
+        {
+          "client_id": "724973534930-58c14q5i0lmspd3jo8sore560k32hhgp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDowXLDypyx7F3s3UJ8eoMHYhVdNoHCNkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724973534930-58c14q5i0lmspd3jo8sore560k32hhgp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
