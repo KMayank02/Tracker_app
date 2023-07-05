@@ -1,16 +1,24 @@
-# anime_track
+<div align="center">
+<h1> Konoha - Anime Tracker </h1>
+</div>
 
-A new Flutter project.
+An anime tracker app built using Flutter and Firebase to help keep track of the anime the user is watching/watched.<br>
+This app pulls the anime data from [Jikan Api](https://docs.api.jikan.moe/).
+In this app, the user can login via Gmail. The user can browse through the various sections and categories presented.
+Anime can be marked as favourite as well can be added to watch list which consists of 3 states - Watched, Watching, Want to Watch.
+These states can be toggled as per the user's wish.
 
-## Getting Started
+## Functionalities :-
+1. Google Auth/ Delete Account
+ 
+2. Change profile name and image
+  
+3. Toggle Favourites and Watch Status
+ 
+4. Search Anime
 
-This project is a starting point for a Flutter application.
+5. Get related and recommendation results
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+6. Anime Trailers on Youtube
+  
+<div id="Bottom"></div>
