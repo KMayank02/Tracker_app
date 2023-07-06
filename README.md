@@ -20,5 +20,7 @@ These states can be toggled as per the user's wish.
 5. Get related and recommendation results
 
 6. Anime Trailers on Youtube
+
+7. No Internet Detection
   
 <div id="Bottom"></div>
