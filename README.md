@@ -27,6 +27,7 @@ These states can be toggled as per the user's wish.
 
 ## Some Screenshots
 <img src="https://github.com/KMayank02/Tracker_app/assets/91678228/0cb1d6e9-04f5-4e50-b2d5-6b9c34707781" width="300"/>
+
 <img src="https://github.com/KMayank02/Tracker_app/assets/91678228/49fad267-377e-4211-863d-fcb550e8e7e2" width="300"/>
 <img src="https://github.com/KMayank02/Tracker_app/assets/91678228/fb8157a1-0428-4fed-ba2e-c34a4384c1a6" width="300"/>
 <img src="https://github.com/KMayank02/Tracker_app/assets/91678228/1f3c9356-06f8-4c8e-828a-d7a238c07d37" width="300"/>
