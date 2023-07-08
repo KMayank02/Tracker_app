@@ -26,6 +26,7 @@ These states can be toggled as per the user's wish.
 8. Season Banners change based on the current season
 
 ## Some Screenshots
+<img src="[https://camo.githubusercontent.com/...](https://github.com/KMayank02/Tracker_app/assets/91678228/0cb1d6e9-04f5-4e50-b2d5-6b9c34707781)" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="100"/>
 ![SS1](https://github.com/KMayank02/Tracker_app/assets/91678228/0cb1d6e9-04f5-4e50-b2d5-6b9c34707781 |width=100)   
 ![SS2](https://github.com/KMayank02/Tracker_app/assets/91678228/49fad267-377e-4211-863d-fcb550e8e7e2)
 ![SS3](https://github.com/KMayank02/Tracker_app/assets/91678228/fb8157a1-0428-4fed-ba2e-c34a4384c1a6)
