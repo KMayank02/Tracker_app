@@ -326,25 +326,27 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                                       GenreList(genres: animeData.genres),
                                       StarRating(score: animeData.score / 2),
                                       InfoCard(anime: animeData),
-                                      Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: kPrimaryColor, width: 2),
-                                            color: kBgColor,
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: BlocConsumer<WatchStatusBloc,
-                                            WatchStatusState>(
-                                          bloc: _watchStatusBloc,
-                                          listener: (context, state) {},
-                                          builder: (context, state) {
-                                            if (state.runtimeType ==
-                                                WatchStatusSuccessfulState) {
-                                              final watchTypeState = state
-                                                  as WatchStatusSuccessfulState;
-                                              return BlocConsumer<
+                                      BlocConsumer<WatchStatusBloc,
+                                          WatchStatusState>(
+                                        bloc: _watchStatusBloc,
+                                        listener: (context, state) {},
+                                        builder: (context, state) {
+                                          if (state.runtimeType ==
+                                              WatchStatusSuccessfulState) {
+                                            final watchTypeState = state
+                                                as WatchStatusSuccessfulState;
+                                            return Container(
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 10),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: kPrimaryColor,
+                                                      width: 2),
+                                                  color: kBgColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: BlocConsumer<
                                                   UserActivityBloc,
                                                   UserActivityState>(
                                                 bloc: _userActivityBloc,
@@ -397,13 +399,18 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                                                                         .imageUrl,
                                                                 malId: animeData
                                                                     .malId,
-                                                                title: animeData
-                                                                    .title,
+                                                                title:
+                                                                    animeData
+                                                                        .title,
                                                                 titleEnglish:
                                                                     animeData
                                                                         .titleEnglish,
-                                                                year: animeData
-                                                                    .airingDate,
+                                                                year: int.parse(
+                                                                    animeData
+                                                                        .airingDate
+                                                                        .substring(
+                                                                            0,
+                                                                            4)),
                                                                 season:
                                                                     animeData
                                                                         .season,
@@ -452,9 +459,8 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                                                       _userActivityBloc.add(WatchSelectEvent(
                                                           user: user!,
                                                           anime: WatchlistTile(
-                                                              imageUrl:
-                                                                  animeData
-                                                                      .imageUrl,
+                                                              imageUrl: animeData
+                                                                  .imageUrl,
                                                               malId: animeData
                                                                   .malId,
                                                               title: animeData
@@ -462,8 +468,11 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                                                               titleEnglish:
                                                                   animeData
                                                                       .titleEnglish,
-                                                              year: animeData
-                                                                  .airingDate,
+                                                              year: int.parse(
+                                                                  animeData
+                                                                      .airingDate
+                                                                      .substring(
+                                                                          0, 4)),
                                                               season: animeData
                                                                   .season,
                                                               airStatus:
@@ -473,58 +482,13 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                                                     },
                                                   );
                                                 },
-                                              );
-                                            }
-                                            return DropdownButton(
-                                              elevation: 0,
-                                              focusColor: Colors.white,
-                                              iconEnabledColor: kPrimaryColor,
-                                              dropdownColor: kPrimaryColor
-                                                  .withOpacity(0.9),
-                                              value: 'Unwatched',
-                                              underline: SizedBox(),
-                                              items: watchItems
-                                                  .map((String typevalue) {
-                                                return DropdownMenuItem(
-                                                  value: typevalue,
-                                                  child: Text(
-                                                    typevalue,
-                                                    style: TextStyle(
-                                                        fontSize: SizeConfig
-                                                                .screenWidth *
-                                                            0.04,
-                                                        color: kTextColor,
-                                                        fontFamily: 'Muli',
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                );
-                                              }).toList(),
-                                              onChanged: (value) {
-                                                _userActivityBloc.add(
-                                                    WatchSelectEvent(
-                                                        user: user!,
-                                                        anime: WatchlistTile(
-                                                            imageUrl: animeData
-                                                                .imageUrl,
-                                                            malId:
-                                                                animeData.malId,
-                                                            title:
-                                                                animeData.title,
-                                                            titleEnglish:
-                                                                animeData
-                                                                    .titleEnglish,
-                                                            year: animeData
-                                                                .airingDate,
-                                                            season: animeData
-                                                                .season,
-                                                            airStatus: animeData
-                                                                .status),
-                                                        type: value!));
-                                              },
+                                              ),
                                             );
-                                          },
-                                        ),
+                                          }
+                                          return CircularProgressIndicator(
+                                            color: kPrimaryColor,
+                                          );
+                                        },
                                       ),
                                       Container(
                                         alignment: Alignment.center,
@@ -544,7 +508,40 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                                     ],
                                   ),
                                   // Divider(height: 8.0, color: Colors.transparent),
-                                  Relations(relIds: animeData.relations),
+                                  if(animeData.relations.isNotEmpty)
+                                  Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(
+                                          left: 20.0, right: 16.0),
+                                      height: 48.0,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                            Text(
+                                              "Related",
+                                              style: TextStyle(
+                                                color: kTextColor,
+                                                fontSize:
+                                                    SizeConfig.screenWidth *
+                                                        0.05,
+                                                fontFamily: 'Muli',
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          IconButton(
+                                            icon: Icon(Icons.arrow_forward,
+                                                color: kTextColor),
+                                            onPressed: () {
+                                      Navigator.of(context, rootNavigator: true)
+                                          .push(MaterialPageRoute(
+                                              builder: (context) => Relations(
+                                                  relIds:
+                                                      animeData.relations)));
+                                    },
+                                          )
+                                        ],
+                                      ),
+                                    ),
                                   Recommendations(malId: animeData.malId)
                                 ],
                               ),

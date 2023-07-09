@@ -7,6 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../colors.dart';
 import '../../../helper_screens/animelist.dart';
@@ -91,9 +92,12 @@ class _MoviesAnimeListState extends State<MoviesAnimeList> {
                           child: CachedNetworkImage(
                             errorWidget: (context, url, error) =>
                                 Image.asset('assets/icons/leaf.png'),
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(),
-                            ),
+                            placeholder: (context, url) => Shimmer.fromColors(
+                                child: Container(
+                                  color: kBgColor,
+                                ),
+                                baseColor: kBgColor,
+                                highlightColor: kPrimaryColor),
                             imageUrl: widget.anime[index].imageUrl,
                             width: width,
                             height: double.infinity,

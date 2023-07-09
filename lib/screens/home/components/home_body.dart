@@ -49,108 +49,110 @@ class _HomeBodyState extends State<HomeBody> {
     SizeConfig().init(context);
     print(user!.uid);
     final contentHeight = 4.0 * (SizeConfig.screenWidth / 2.4) / 3;
-    return RefreshIndicator(
-      backgroundColor: kBgColor2,
-      color: kPrimaryColor,
-      onRefresh: () {
-        animeBloc.add(TopAnimeInitialFetchEvent());
-        airingAnimeBloc.add(AiringAnimeInitialFetchEvent());
-        moviesBloc.add(MoviesInitialFetchEvent());
-        return Future.delayed(Duration(seconds: 2));
-      },
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(minHeight: viewportConstraints.maxHeight),
-              child: Container(
-                child: Column(
-                  children: [
-                    Divider(
-                        height: MediaQuery.of(context).padding.top,
-                        color: Colors.transparent),
-                    CarouselNav(),
-                    Divider(height: 4, color: Colors.transparent),
-
-                    BlocConsumer<TopAnimeBloc, TopAnimeState>(
-                      bloc: animeBloc,
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        switch (state.runtimeType) {
-                          case TopAnimeFetchingLoadingState:
-                            return LoaderDialog(
-                              w: SizeConfig.screenWidth * 0.3,
-                            );
-
-                          case TopAnimeFetchingSuccessfulState:
-                            final topAnimeSuccessState =
-                                state as TopAnimeFetchingSuccessfulState;
-                            return TopAnimeList(
-                                anime: topAnimeSuccessState.topAnime);
-                          case TopAnimeFetchingErrorState:
-                            return ErrorLoader(w: SizeConfig.screenWidth * 0.3);
-                          default:
-                            return const SizedBox();
-                        }
-                      },
-                    ),
-                    // Divider(height: 2.0, color: Colors.transparent),
-                    BlocConsumer<AiringAnimeBloc, AiringAnimeState>(
-                      bloc: airingAnimeBloc,
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        switch (state.runtimeType) {
-                          case AiringAnimeFetchingLoadingState:
-                            return LoaderDialog(
-                              w: SizeConfig.screenWidth * 0.3,
-                            );
-
-                          case AiringAnimeFetchingSuccessfulState:
-                            final airingAnimeSuccessState =
-                                state as AiringAnimeFetchingSuccessfulState;
-                            return AiringAnimeList(
-                                anime: airingAnimeSuccessState.airingAnime);
-
-                          case AiringAnimeFetchingErrorState:
-                            return ErrorLoader(w: SizeConfig.screenWidth * 0.3);
-
-                          default:
-                            return const SizedBox();
-                        }
-                      },
-                    ),
-                    // Divider(height: 2.0, color: Colors.transparent),
-                    BlocConsumer<MoviesBloc, MoviesState>(
-                      bloc: moviesBloc,
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        switch (state.runtimeType) {
-                          case MoviesFetchingLoadingState:
-                            return LoaderDialog(
-                              w: SizeConfig.screenWidth * 0.3,
-                            );
-
-                          case MoviesFetchingSuccessfulState:
-                            final moviesSuccessState =
-                                state as MoviesFetchingSuccessfulState;
-                            return MoviesAnimeList(
-                                anime: moviesSuccessState.movies);
-
-                          case MoviesFetchingErrorState:
-                            return ErrorLoader(w: SizeConfig.screenWidth * 0.3);
-
-                          default:
-                            return const SizedBox();
-                        }
-                      },
-                    ),
-                  ],
+    return SafeArea(
+      child: RefreshIndicator(
+        backgroundColor: kPrimaryColor,
+        color: kBgColor,
+        onRefresh: () {
+          animeBloc.add(TopAnimeInitialFetchEvent());
+          airingAnimeBloc.add(AiringAnimeInitialFetchEvent());
+          moviesBloc.add(MoviesInitialFetchEvent());
+          return Future.delayed(Duration(seconds: 1));
+        },
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints viewportConstraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Divider(
+                          height: MediaQuery.of(context).padding.top,
+                          color: Colors.transparent),
+                      CarouselNav(),
+                      Divider(height: 4, color: Colors.transparent),
+    
+                      BlocConsumer<TopAnimeBloc, TopAnimeState>(
+                        bloc: animeBloc,
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          switch (state.runtimeType) {
+                            case TopAnimeFetchingLoadingState:
+                              return LoaderDialog(
+                                w: SizeConfig.screenWidth * 0.3,
+                              );
+    
+                            case TopAnimeFetchingSuccessfulState:
+                              final topAnimeSuccessState =
+                                  state as TopAnimeFetchingSuccessfulState;
+                              return TopAnimeList(
+                                  anime: topAnimeSuccessState.topAnime);
+                            case TopAnimeFetchingErrorState:
+                              return ErrorLoader(w: SizeConfig.screenWidth * 0.3);
+                            default:
+                              return const SizedBox();
+                          }
+                        },
+                      ),
+                      // Divider(height: 2.0, color: Colors.transparent),
+                      BlocConsumer<AiringAnimeBloc, AiringAnimeState>(
+                        bloc: airingAnimeBloc,
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          switch (state.runtimeType) {
+                            case AiringAnimeFetchingLoadingState:
+                              return LoaderDialog(
+                                w: SizeConfig.screenWidth * 0.3,
+                              );
+    
+                            case AiringAnimeFetchingSuccessfulState:
+                              final airingAnimeSuccessState =
+                                  state as AiringAnimeFetchingSuccessfulState;
+                              return AiringAnimeList(
+                                  anime: airingAnimeSuccessState.airingAnime);
+    
+                            case AiringAnimeFetchingErrorState:
+                              return ErrorLoader(w: SizeConfig.screenWidth * 0.3);
+    
+                            default:
+                              return const SizedBox();
+                          }
+                        },
+                      ),
+                      // Divider(height: 2.0, color: Colors.transparent),
+                      BlocConsumer<MoviesBloc, MoviesState>(
+                        bloc: moviesBloc,
+                        listener: (context, state) {},
+                        builder: (context, state) {
+                          switch (state.runtimeType) {
+                            case MoviesFetchingLoadingState:
+                              return LoaderDialog(
+                                w: SizeConfig.screenWidth * 0.3,
+                              );
+    
+                            case MoviesFetchingSuccessfulState:
+                              final moviesSuccessState =
+                                  state as MoviesFetchingSuccessfulState;
+                              return MoviesAnimeList(
+                                  anime: moviesSuccessState.movies);
+    
+                            case MoviesFetchingErrorState:
+                              return ErrorLoader(w: SizeConfig.screenWidth * 0.3);
+    
+                            default:
+                              return const SizedBox();
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

@@ -19,6 +19,7 @@ class InfoCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(''),
+            if (anime.type == 'TV')
             Column(
               children: [
                 Text(
@@ -54,7 +55,7 @@ class InfoCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  anime.airingDate.toString(),
+                  anime.airingDate.substring(0,4),
                   style: TextStyle(
                     fontSize: SizeConfig.screenWidth * 0.05,
                     color: kPrimaryColor,
@@ -96,7 +97,7 @@ class InfoCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  anime.episodes > 0 ? anime.episodes.toString() : 'NA',
+                  anime.episodes > 0 ? anime.episodes.toString() : '-',
                   style: TextStyle(
                     fontSize: SizeConfig.screenWidth * 0.05,
                     color: kPrimaryColor,

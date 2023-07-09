@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../bloc/auth/auth_events.dart';
 import '../../bloc/auth/auth_bloc.dart';
@@ -47,16 +48,17 @@ class _FavouritesBodyState extends State<FavouritesBody> {
     SizeConfig().init(context);
     return SafeArea(
       child: RefreshIndicator(
-        backgroundColor: kBgColor2,
-        color: kPrimaryColor,
+        backgroundColor: kPrimaryColor,
+        color: kBgColor,
         onRefresh: () {
           _favouritesFetchBloc.add(FavouritesFetchInitialEvent(user!.uid));
-          return Future.delayed(Duration(seconds: 2));
+          return Future.delayed(Duration(seconds: 1));
         },
         child: BlocConsumer<UserActivityBloc, UserActivityState>(
           bloc: _userActivityBloc,
           listener: (context, state) {},
-          buildWhen: (previous, current) => current is FavouriteDeleteClickedState,
+          buildWhen: (previous, current) =>
+              current is FavouriteDeleteClickedState,
           builder: (context, state) {
             _favouritesFetchBloc.add(FavouritesFetchInitialEvent(user!.uid));
             return BlocConsumer<FavouritesFetchBloc, FavouritesFetchState>(
@@ -70,10 +72,11 @@ class _FavouritesBodyState extends State<FavouritesBody> {
                     return LoaderDialog(
                       w: SizeConfig.screenWidth * 0.4,
                     );
-      
+
                   case FavouritesFetchSuccessfulState:
-                    final favouritesState = state as FavouritesFetchSuccessfulState;
-      
+                    final favouritesState =
+                        state as FavouritesFetchSuccessfulState;
+
                     if (favouritesState.favourites.isNotEmpty) {
                       List<FavouriteTile> favAnime = favouritesState.favourites;
                       favAnime.sort((a, b) {
@@ -93,14 +96,16 @@ class _FavouritesBodyState extends State<FavouritesBody> {
                                 child: Column(
                                   children: [
                                     Divider(
-                                        height: MediaQuery.of(context).size.width *
-                                            0.05,
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.05,
                                         color: Colors.transparent),
                                     ListView.separated(
                                       physics: NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
                                       scrollDirection: Axis.vertical,
-                                      separatorBuilder: (context, index) => Divider(
+                                      separatorBuilder: (context, index) =>
+                                          Divider(
                                         color: Colors.transparent,
                                         height: 3,
                                       ),
@@ -108,12 +113,13 @@ class _FavouritesBodyState extends State<FavouritesBody> {
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return Container(
-                                          padding:
-                                              EdgeInsets.symmetric(horizontal: 15),
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15),
                                           margin: EdgeInsets.only(bottom: 10),
                                           child: Slidable(
-                                            key: Key(
-                                                favAnime[index].malId.toString()),
+                                            key: Key(favAnime[index]
+                                                .malId
+                                                .toString()),
                                             direction: Axis.horizontal,
                                             endActionPane: ActionPane(
                                               motion: const DrawerMotion(),
@@ -130,7 +136,8 @@ class _FavouritesBodyState extends State<FavouritesBody> {
                                                   },
                                                   backgroundColor: kBgColor,
                                                   foregroundColor: kRedColor,
-                                                  icon: CupertinoIcons.heart_slash,
+                                                  icon: CupertinoIcons
+                                                      .heart_slash,
                                                 ),
                                               ],
                                             ),
@@ -141,9 +148,9 @@ class _FavouritesBodyState extends State<FavouritesBody> {
                                                     .push(MaterialPageRoute(
                                                         builder: (context) =>
                                                             AnimeDetailScreen(
-                                                                malID:
-                                                                    favAnime[index]
-                                                                        .malId)));
+                                                                malID: favAnime[
+                                                                        index]
+                                                                    .malId)));
                                               },
                                               child: Card(
                                                 color: kBgColor2,
@@ -153,7 +160,8 @@ class _FavouritesBodyState extends State<FavouritesBody> {
                                                 child: Container(
                                                   padding: EdgeInsets.all(10),
                                                   child: Row(
-                                                    mainAxisSize: MainAxisSize.max,
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
@@ -169,65 +177,87 @@ class _FavouritesBodyState extends State<FavouritesBody> {
                                                               favAnime[index]
                                                                           .titleEnglish !=
                                                                       'TBA'
-                                                                  ? favAnime[index]
+                                                                  ? favAnime[
+                                                                          index]
                                                                       .titleEnglish
-                                                                  : favAnime[index]
+                                                                  : favAnime[
+                                                                          index]
                                                                       .title,
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'Muli',
-                                                                  color: kTextColor,
-                                                                  fontSize: SizeConfig
-                                                                          .screenWidth *
-                                                                      0.05,
+                                                                  color:
+                                                                      kTextColor,
+                                                                  fontSize:
+                                                                      SizeConfig
+                                                                              .screenWidth *
+                                                                          0.05,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
                                                               maxLines: 2,
-                                                              overflow: TextOverflow
-                                                                  .ellipsis,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
                                                             ),
                                                             Text(
-                                                              "${favAnime[index].season[0].toUpperCase()}${favAnime[index].season.substring(1).toLowerCase()}\t${favAnime[index].year.toString()}",
+                                                              favAnime[index]
+                                                                          .season !=
+                                                                      ''
+                                                                  ? "${favAnime[index].season[0].toUpperCase()}${favAnime[index].season.substring(1).toLowerCase()}\t${favAnime[index].year.toString()}"
+                                                                  : favAnime[
+                                                                          index]
+                                                                      .year
+                                                                      .toString(),
                                                               style: TextStyle(
                                                                   fontFamily:
                                                                       'Muli',
                                                                   color:
                                                                       kPrimaryColor,
-                                                                  fontSize: SizeConfig
-                                                                          .screenWidth *
-                                                                      0.04,
+                                                                  fontSize:
+                                                                      SizeConfig
+                                                                              .screenWidth *
+                                                                          0.04,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .bold),
                                                               maxLines: 2,
-                                                              overflow: TextOverflow
-                                                                  .ellipsis,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
                                                             ),
                                                           ],
                                                         ),
                                                       ),
                                                       Flexible(
-                                                        child: CachedNetworkImage(
-                                                          
-                                                          placeholder:
-                                                              (context, url) =>
-                                                                  Center(
-                                                            child:
-                                                                CircularProgressIndicator(),
-                                                          ),
-                                                          imageUrl: favAnime[index]
-                                                              .imageUrl,
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          placeholder: (context,
+                                                                  url) =>
+                                                              Shimmer
+                                                                  .fromColors(
+                                                                      child:
+                                                                          Container(
+                                                                        color:
+                                                                            kBgColor,
+                                                                      ),
+                                                                      baseColor:
+                                                                          kBgColor,
+                                                                      highlightColor:
+                                                                          kPrimaryColor),
+                                                          imageUrl:
+                                                              favAnime[index]
+                                                                  .imageUrl,
                                                           errorWidget: (context,
                                                                   url, error) =>
                                                               Image.asset(
                                                                   'assets/icons/leaf.png'),
                                                           // width: 60,
-                                                          height:
-                                                              MediaQuery.of(context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.2,
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.2,
                                                           fit: BoxFit.contain,
                                                         ),
                                                       ),
@@ -262,10 +292,10 @@ class _FavouritesBodyState extends State<FavouritesBody> {
                   //     );
                   //   },
                   // );
-      
+
                   case FavouritesFetchErrorState:
                     return ErrorScreen();
-      
+
                   default:
                     return Container();
                 }

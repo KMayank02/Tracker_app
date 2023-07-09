@@ -9,6 +9,7 @@ import 'package:anime_track/size_config.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../bloc/auth/auth_events.dart';
 import '../../bloc/auth/auth_bloc.dart';
@@ -44,7 +45,7 @@ class _ProfileBodyState extends State<ProfileBody> {
     SizeConfig().init(context);
     return SafeArea(
       child: RefreshIndicator(
-        backgroundColor: kBgColor2,
+        backgroundColor: kPrimaryColor,
         color: kPrimaryColor,
         onRefresh: () {
           _userBloc.add(UserDataInitialFetchEvent(user!));
@@ -147,9 +148,17 @@ class _ProfileBodyState extends State<ProfileBody> {
                                                               ),
                                                             ),
                                                             errorWidget: (context, url, error) => CachedNetworkImage(imageUrl: user!.photoURL!,errorWidget: (context, url, error) => CircleAvatar(),),
-                                                            placeholder: (context,
-                                                                    url) =>
-                                                                CircularProgressIndicator(),
+                                                            placeholder: (context, url) => Shimmer
+                                                                .fromColors(
+                                                                    child:
+                                                                        Container(
+                                                                      color:
+                                                                          kBgColor,
+                                                                    ),
+                                                                    baseColor:
+                                                                        kBgColor,
+                                                                    highlightColor:
+                                                                        kPrimaryColor),
                                                           ),
                                                           Positioned(
                                                               // bottom: 0,

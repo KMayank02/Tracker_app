@@ -14,7 +14,7 @@ class ErrorLoader extends StatelessWidget {
       content: Container(
         child: Center(
           child: Image.asset(
-            'assets/errors/noResults.png',
+            'assets/errors/notFound.png',
             width: w,
           ),
         ),

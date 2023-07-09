@@ -174,7 +174,7 @@ class UserRepo {
               : anime.title,
           "imageUrl": anime.imageUrl,
           "season": anime.season,
-          "year": anime.airingDate
+          "year": int.parse(anime.airingDate.substring(0,4))
         }
       });
     } catch (e) {

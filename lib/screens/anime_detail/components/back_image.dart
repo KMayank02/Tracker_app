@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:shape_of_view_null_safe/shape_of_view_null_safe.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../colors.dart';
@@ -41,9 +42,14 @@ class _BackImageState extends State<BackImage> {
               height: width,
               child: Container(
                 child: CachedNetworkImage(
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  errorWidget: (context, url, error) =>
+                      Image.asset('assets/icons/leaf.png'),
+                  placeholder: (context, url) => Shimmer.fromColors(
+                      child: Container(
+                        color: kBgColor,
+                      ),
+                      baseColor: kBgColor,
+                      highlightColor: kPrimaryColor),
                   imageUrl: widget.imageUrl,
                   width: double.infinity,
                   height: double.infinity,

@@ -15,7 +15,7 @@ class Anime extends Equatable {
   late String status;
   late int episodes;
   late var score;
-  late int airingDate;
+  late String airingDate;
   late String season;
   late List<Genre> genres;
   late Map<int, String> relations;
@@ -28,10 +28,11 @@ class Anime extends Equatable {
     this.trailerUrl = '',
     this.titleEnglish = '',
     this.synopsis = '',
+    this.type = '',
     this.status = '',
     this.episodes = 0,
     this.score = 0,
-    this.airingDate = 0,
+    this.airingDate = '',
     this.season ='',
     this.genres = const [],
     this.relations = const {},
@@ -68,7 +69,7 @@ class Anime extends Equatable {
     Map<int, String> tempRelationList = {};
 
     for (int i = 0; i < json['relations'].length; i++) {
-      if (json['relations'][i]['relation'] == 'Prequel'||json['relations'][i]['relation'] == 'Sequel') {
+      if (json['relations'][i]['relation'] == 'Prequel'|| json['relations'][i]['relation'] == 'Sequel' || json['relations'][i]['relation'] == 'Alternative version' || json['relations'][i]['relation'] == 'Parent story') {
         int id = json['relations'][i]['entry'][0]['mal_id'];
         String type = json['relations'][i]['relation'];
         tempRelationList[id] = type;
@@ -109,10 +110,11 @@ class Anime extends Equatable {
       trailerUrl: json['trailer']['url'] ?? '',
       titleEnglish: json['title_english'] ?? json['title'] ?? 'TBA',
       synopsis: json['synopsis'] ?? '',
+      type: json['type'] ?? '-',
       status: status,
       episodes: json['episodes'] ?? 0,
       score: json['score'] ?? 0,
-      airingDate: json['year'] ?? 0,
+      airingDate: json['aired']['from'] ?? '-',
       season: json['season']??'',
       genres: tempGenresList,
       relations: tempRelationList,
@@ -127,6 +129,7 @@ class Anime extends Equatable {
         trailerUrl,
         titleEnglish,
         synopsis,
+        type,
         status,
         episodes,
         score,

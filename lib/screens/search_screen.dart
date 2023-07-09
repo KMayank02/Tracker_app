@@ -6,6 +6,7 @@ import 'package:anime_track/helper_screens/no_results.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../colors.dart';
 import '../size_config.dart';
@@ -172,12 +173,16 @@ class _SearchAnimeScreenState extends State<SearchAnimeScreen> {
                                                               url, error) =>
                                                           Image.asset(
                                                               'assets/icons/leaf.png'),
-                                                      placeholder:
-                                                          (context, url) =>
-                                                              Center(
-                                                        child:
-                                                            CircularProgressIndicator(),
-                                                      ),
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          Shimmer.fromColors(
+                                                              child: Container(
+                                                                color: kBgColor,
+                                                              ),
+                                                              baseColor:
+                                                                  kBgColor,
+                                                              highlightColor:
+                                                                  kPrimaryColor),
                                                       imageUrl: searchState
                                                           .searchedAnime[index]
                                                           .imageUrl,

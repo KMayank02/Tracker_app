@@ -43,8 +43,8 @@ class _WatchlistBodyState extends State<WatchlistBody> {
     SizeConfig().init(context);
     return SafeArea(
       child: RefreshIndicator(
-        backgroundColor: kBgColor2,
-        color: kPrimaryColor,
+        backgroundColor: kPrimaryColor,
+        color: kBgColor,
         onRefresh: () {
           _watchlistFetchBloc.add(WatchlistFetchInitialEvent(user!.uid));
           return Future.delayed(Duration(seconds: 1));
@@ -190,8 +190,10 @@ class _WatchlistBodyState extends State<WatchlistBody> {
                                                         overflow:
                                                             TextOverflow.ellipsis,
                                                       ),
-                                                      Text(
-                                                        "${localList[index].season[0].toUpperCase()}${localList[index].season.substring(1).toLowerCase()}\t${localList[index].year.toString()}",
+                                                      Text(localList[index].season!=''?
+                                                        "${localList[index].season[0].toUpperCase()}${localList[index].season.substring(1).toLowerCase()}\t${localList[index].year.toString()}": localList[index]
+                                                                .year
+                                                                .toString(),
                                                         style: TextStyle(
                                                             fontFamily: 'Muli',
                                                             color: kPrimaryColor,

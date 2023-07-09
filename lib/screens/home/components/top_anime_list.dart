@@ -10,6 +10,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../colors.dart';
 import '../../../helper_screens/animelist.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TopAnimeList extends StatefulWidget {
   final List<AnimeTile> anime;
@@ -39,7 +40,7 @@ class _TopAnimeListState extends State<TopAnimeList> {
                     "Top 10 of All Time",
                     style: TextStyle(
                       color: kTextColor,
-                      fontSize: SizeConfig.screenWidth*0.05,
+                      fontSize: SizeConfig.screenWidth * 0.05,
                       fontFamily: 'Muli',
                       fontWeight: FontWeight.bold,
                     ),
@@ -62,9 +63,11 @@ class _TopAnimeListState extends State<TopAnimeList> {
                 final width = MediaQuery.of(context).size.width / 2.6;
                 return InkWell(
                   onTap: () {
-                    Navigator.of(context, rootNavigator: true).push(
-                        MaterialPageRoute(
-                            builder: (context) => AnimeDetailScreen(malID: widget.anime[index].malId,)));
+                    Navigator.of(context, rootNavigator: true)
+                        .push(MaterialPageRoute(
+                            builder: (context) => AnimeDetailScreen(
+                                  malID: widget.anime[index].malId,
+                                )));
                   },
                   child: Stack(
                     children: [
@@ -78,10 +81,11 @@ class _TopAnimeListState extends State<TopAnimeList> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: CachedNetworkImage(
-                            errorWidget: (context, url, error) => Image.asset('assets/icons/leaf.png'),
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(),
-                            ),
+                            errorWidget: (context, url, error) =>
+                                Image.asset('assets/icons/leaf.png'),
+                            placeholder: (context, url) =>Shimmer.fromColors(child: Container(
+                                  color: kBgColor,
+                                ), baseColor: kBgColor, highlightColor: kPrimaryColor),
                             imageUrl: widget.anime[index].imageUrl,
                             width: width,
                             height: double.infinity,
